@@ -18,10 +18,13 @@ class App extends Component {
       start: false
     })
   }
+  handleOk (e) {
+    console.log(e.target.className)
+  }
   render() {
     return (
       <div>
-      <Guide visible={this.state.start} onCancel={this.handleCancel.bind(this)} >
+      <Guide visible={this.state.start} onCancel={this.handleCancel.bind(this)} onOk={this.handleOk.bind(this)} >
       <h1 data-step="1" data-tip='Hello World,I am Jike, Hello World,I am Jike'>11</h1>
       <div data-step="3" data-tip='222'>
         22

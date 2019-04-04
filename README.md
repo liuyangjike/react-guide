@@ -16,7 +16,34 @@ To install, you can use [npm](https://npmjs.org/)
 
 ## API documentation
 
-
+| Property | Description | Type | Default |
+| -------- | ----------- | ---- | ------- |
+| visible | Whether the modal dialog is visible or not | boolean | false |
+| onCancel | Specify a function that will be called when a user clicks shadow, skip button on bottom left | function(e) | - |
+| audio | Whether a voice reads of tip  of the guide or not | boolean | true |
+| bullet | Whether bullets (.) button is visible on middle of the guide or not | boolean | false |
+| num | Whether num icon is visible on top left of the guide or not | boolean | false |
+| closable | Whether a close (x) button is visible on top right of the modal dialog or not | boolean | true |
+| confirmLoading | Whether to apply loading visual effect for OK button or not | boolean | false |
+| destroyOnClose | Whether to unmount child components on onClose | boolean | false |
+| footer | Footer content, set as `footer={null}` when you don't need default buttons | string\|ReactNode | OK and Cancel buttons |
+| forceRender | Force render Modal | boolean | false |
+| getContainer | Return the mount node for Modal | (instance): HTMLElement | () => document.body |
+| mask | Whether show mask or not. | Boolean | true |
+| maskClosable | Whether to close the modal dialog when the mask (area outside the modal) is clicked | boolean | true |
+| maskStyle | Style for modal's mask element. | object | {} |
+| okText | Text of the OK button | string\|ReactNode | `OK` |
+| okType | Button `type` of the OK button | string | `primary` |
+| okButtonProps | The ok button props | [ButtonProps](/components/button) | - |
+| cancelButtonProps | The cancel button props | [ButtonProps](/components/button) | - |
+| style | Style of floating layer, typically used at least for adjusting the position. | object | - |
+| title | The modal dialog's title | string\|ReactNode | - |
+| visible | Whether the modal dialog is visible or not | boolean | false |
+| width | Width of the modal dialog | string\|number | 520 |
+| wrapClassName | The class name of the container of the modal dialog | string | - |
+| zIndex | The `z-index` of the Modal | Number | 1000 |
+| onCancel | Specify a function that will be called when a user clicks mask, close button on top right or Cancel button | function(e) | - |
+| onOk | Specify a function that will be called when a user clicks the OK button | function(e) | - |
 
 ## Examples
 

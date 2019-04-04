@@ -10,7 +10,9 @@ class Guide extends Component {
     visible: false,
     lan: 'en',
     audio: true,
-    onCancel: function () {}
+    onCancel: function () {},
+    onOk: function () {}
+
   }
   static propTypes = {
     children: PropTypes.any,
@@ -19,7 +21,8 @@ class Guide extends Component {
     num: PropTypes.bool,
     lan: PropTypes.string,
     audio: PropTypes.bool,
-    onCancel: PropTypes.func
+    onCancel: PropTypes.func,
+    onOk: PropTypes.func,
   }
   constructor (props) {
     super(props)
@@ -189,7 +192,11 @@ class Guide extends Component {
     }
   }
   handleSkip(event) {
+    event = event || window.event;
     this._removeZindex()
+    if (this.state.activeIndex === this.state.dots.length - 1) {
+      this.props.onOk(event)
+    }
     this._closeGuide(event)
   }
   render () {

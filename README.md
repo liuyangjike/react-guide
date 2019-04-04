@@ -18,11 +18,11 @@ To install, you can use [npm](https://npmjs.org/)
 
 | Property | Description | Type | Default |
 | -------- | ----------- | ---- | ------- |
-| visible | Whether the modal dialog is visible or not | boolean | false |
-| onCancel | Specify a function that will be called when a user clicks shadow, skip button on bottom left | function(e) | - |
+| visible | Whether the guide is visible or not | boolean | false |
 | audio | Whether a voice reads of tip  of the guide or not | boolean | true |
 | bullet | Whether bullets (.) button is visible on middle of the guide or not | boolean | false |
 | num | Whether num icon is visible on top left of the guide or not | boolean | false |
+| onCancel | Specify a function that will be called when a user clicks shadow, skip button on bottom left | function(e) | - |
 | onOk | Specify a function that will be called when all steps have done and click the done button | function(e) | - |
 
 ## Examples

@@ -1,0 +1,36 @@
+{
+  "name": "react-guide",
+  "version": "1.0.8",
+  "description": "a guide component for web page",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "webpack --env.NODE_ENV=production",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prop-types": "15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@babel/core": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/preset-env": "7.2.3",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.5",
+    "css-loader": "0.28.9",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "3.2.0",
+    "style-loader": "0.19.1",
+    "webpack": "4.29.0",
+    "webpack-cli": "3.2.1",
+    "webpack-dev-server": "3.1.14",
+    "webpack-node-externals": "1.6.0"
+  }
+}

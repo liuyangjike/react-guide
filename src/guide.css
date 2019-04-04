@@ -1,0 +1,204 @@
+@import './assets/fonts/iconfont.css';
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family:"iconfont";
+  font-size:12px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.guide-container{
+  position: relative;
+}
+
+.guide-shadow{
+  position: fixed;
+  top:0;
+  z-index: 99999;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.8;
+  background-color:  rgba(0, 0, 0, 0.8);
+  transition: all .3s ease-out;
+}
+
+.guide-content{
+  position: absolute;
+  display: block;
+  z-index: 999991;
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(0, 0, 0, .5);
+  border-radius: 4px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, .4);
+  transition: all .3s ease-out;
+  background-color: rgba(255, 255, 255, 0.9)
+}
+
+.guide-icon-no{
+  position: absolute;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  z-index: 999998;
+  color: #fff;
+  background: linear-gradient(to bottom,#409EFF 0%,#007fff 100%);
+  font-weight: 6000;
+  padding: 1px;
+  font-size: 13px;
+  line-height: 20px;
+  font-family: Arial,verdana,tahoma;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,.4);
+  transition: all .3s ease-out;
+}
+
+.guide-tooltip{
+  position: absolute;
+  border-radius: 5px;
+  z-index: 999995;
+  display: block;
+  opacity: 1;
+  padding: 15px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, .4);
+  transition: opacity .1s ease-out;
+  min-width: 200px;
+  max-width: 250px;
+  background-color: #fff;
+}
+
+.guide-tooltip div:nth-child(1) {
+  font: 14px/normal sans-serif;
+  color: #2d2d2d;
+  font-weight: 400;
+  zoom: 1;
+  margin-bottom: 0;
+}
+
+.guide-tooltip .audio-play{
+  position: absolute;
+  top: 17px;
+  z-index: 999999;
+  right: 5px;
+  width: 26px;
+  height: 18px;
+  background-size: 20px 19px;
+  background-repeat: no-repeat;
+  background-position: 7px -2px;
+  background-image: url('http://fanyi.bdstatic.com/static/translation/img/translate/output/sound2x_d6f553d.gif')
+}
+
+.guide-tooltip .audio-noplay{
+  position: absolute;
+  top: 17px;
+  z-index: 999999;
+  right: 5px;
+  background-repeat: no-repeat;
+  background-position: 0 -1046px;
+  height: 16px;
+  width: 19px;
+  background-image: url('http://fanyi.bdstatic.com/static/translation/sprite/images/normal/index-sc413d90635_65ba9b0.png')
+}
+
+.guide-tooltip .guide-arrow{
+  position: absolute;
+  content: '';
+  border: 5px solid #fff;
+}
+
+.guide-tooltip .top{
+  top: -10px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: #fff;
+  border-left-color: transparent;
+}
+
+.guide-tooltip .left{
+  left: -10px;
+  top: 10px;
+  border-top-color: transparent;
+  border-right-color: #fff;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+.guide-tooltip .bottom{
+  bottom: -10px;
+  left: 10px;
+  border-top-color: #fff;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+.guide-tooltip .right{
+  right: -10px;
+  top: 10px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: #fff;
+}
+
+.guide-bullets ul{
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+.guide-bullets ul li{
+  list-style: none;
+}
+.guide-bullets ul li div{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 2px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+.guide-bullets .active-dot{
+  background-color: #409EFF
+}
+
+.guide-button-group{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.guide-button{
+  background-color: #409EFF;
+  border-color: #409EFF;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  line-height: 1;
+  font-size: 13px;
+  outline: none;
+  margin: 0;
+  padding: 4px 7px;
+}
+
+.guide-button-total {
+  border-radius: 3px;
+}
+
+.guide-button-left {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+  border-right-color: hsla(0,0%,100%,.5)
+}
+
+.guide-button-right {
+  border-bottom-right-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.guide-button-disabled {
+  background-color: #a0cfff;
+  border-color: #a0cfff;
+  cursor: not-allowed;
+}

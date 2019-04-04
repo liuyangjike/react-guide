@@ -1,6 +1,6 @@
 {
   "name": "react-guide",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "a guide component for web page",
   "main": "lib/index.js",
   "files": [

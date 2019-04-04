@@ -12,7 +12,6 @@ class Guide extends Component {
     audio: true,
     onCancel: function () {},
     onOk: function () {}
-
   }
   static propTypes = {
     children: PropTypes.any,
@@ -158,15 +157,16 @@ class Guide extends Component {
     node.style.setProperty('position', 'relative');
     node.style.setProperty('z-index', '999996', 'important');
     if (newIndex !== this.state.activeIndex) {
-      this._removeZindex()
+      this._removeActive()
     }
   }
   _playAudio () {
     this.refs.audio.autoplay = true
   }
-  _removeZindex() {
+  _removeActive() {
     let lastNode = this.state.nodeList[this.state.activeIndex]
     lastNode.style.setProperty('position', '');
+    lastNode.style.setProperty('z-index', 'auto');
   }
   _closeGuide (event) {
     this.setState({
@@ -193,7 +193,7 @@ class Guide extends Component {
   }
   handleSkip(event) {
     event = event || window.event;
-    this._removeZindex()
+    this._removeActive()
     if (this.state.activeIndex === this.state.dots.length - 1) {
       this.props.onOk(event)
     }

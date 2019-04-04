@@ -35,6 +35,9 @@ class App extends Component {
       <div>
         <span data-step="4" data-tip='let me start' style={{marginLeft: '100px'}}>4444</span>
       </div>
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+        <input data-step="5" data-tip='it is input' type="text"/>
+      </div>
       
     </Guide>
     <button onClick={this.handleGiude.bind(this)}>start</button>

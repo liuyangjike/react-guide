@@ -67,7 +67,7 @@ class Guide extends Component {
   shouldComponentUpdate (nextProps) {
     if (nextProps.visible && nextProps.visible !== this.props.visible) {
       this._setTargetIndex(this.state.nodeList[0], 0)
-      this._setDot(this.state.dots[0], 'start')
+      this._setDot(this.state.dots[0], 0,'start')
       this.refs.audio.load()
     }
     return true
@@ -99,7 +99,7 @@ class Guide extends Component {
       }
     }, false)
   }
-  _setDot (dot, action) {
+  _setDot (dot, newIndex, action) {
     let delay = action === 'start'?100:350
     this.setState({
       contentStyle: dot,
@@ -111,6 +111,7 @@ class Guide extends Component {
       tip: dot.tip,
       audioUrl: text2Voice(dot.tip, this.props.lan)
     })
+    this._focusTarget(newIndex)
     var timer = setTimeout(() => {
       this.setState({
         tipStyle: this._getTipStyle(dot),
@@ -163,6 +164,15 @@ class Guide extends Component {
   _playAudio () {
     this.refs.audio.autoplay = true
   }
+  _focusTarget(targetIndex) {
+    var {top, bottom, left, right} = this.state.nodeList[targetIndex].getBoundingClientRect()
+    let dTop = this.state.dots[targetIndex].top
+    if (top > window.innerHeight) {
+      window.scrollTo(0, top + window.scrollY - 20)
+    } else if (top < 0) {
+      window.scrollTo(0, dTop -20)
+    }
+  }
   _removeActive() {
     let lastNode = this.state.nodeList[this.state.activeIndex]
     lastNode.style.setProperty('position', '');
@@ -180,7 +190,7 @@ class Guide extends Component {
     this.setState({
       activeIndex: newIndex
     })
-    this._setDot(this.state.dots[newIndex])
+    this._setDot(this.state.dots[newIndex], newIndex)
     this._setTargetIndex(this.state.nodeList[newIndex], newIndex)
   }
   handleJumpStep (event) {

@@ -51,9 +51,7 @@ class App extends Component {
           onCancel={this.handleCancel.bind(this)} >
             <h1 data-step="1" data-tip='Hello World,I am Jike'>11</h1>
             <div data-step="3" data-tip='nice to meet you'>22</div>
-            <div>
-              <h4 data-step="2" data-tip='glad to use react guide' >不不不不不</h4>
-            </div>
+            <h4 data-step="2" data-tip='glad to use react guide' >不不不</h4>
             <div><span data-step="4" data-tip='let me start'>4444</span></div>
       </Guide>
       <button onClick={this.handleStart.bind(this)}>start</button>

@@ -17,7 +17,7 @@ To install, you can use [npm](https://npmjs.org/)
 ## API documentation
 
 | Property | Description | Type | Default |
-| -------- | ----------- | ---- | ------- |
+| --------- | ----------- | ---- | ------- |
 | visible | Whether the guide is visible or not | boolean | false |
 | audio | Whether a voice reads of tip  of the guide or not | boolean | true |
 | lan | The voice of language, 'en' or 'zh' | string | en |

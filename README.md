@@ -1,5 +1,5 @@
 # react-guide
-Accessible guide component for React.JS to introduce web page
+A reactjs component is used for web page guidance
 
 ## Table of Contents
 

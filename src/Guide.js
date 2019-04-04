@@ -82,8 +82,7 @@ class Guide extends Component {
   onClickShadow (event) {
     if (event.target.className ==='guide-shadow') {
       this.refs.shadow.removeEventListener('click',this.onClickShadow.bind(this), false)
-      this.refs.audio.pause()
-      this.props.onCancel(event)
+      this._closeGuide(event)
     }
   }
   onAudioFulfill () {
@@ -166,6 +165,13 @@ class Guide extends Component {
     let lastNode = this.state.nodeList[this.state.activeIndex]
     lastNode.style.setProperty('position', '');
   }
+  _closeGuide (event) {
+    this.setState({
+      activeIndex: 0
+    })
+    this.refs.audio.pause()
+    this.props.onCancel(event)
+  }
   handleChangeStep (direction, jump) {
     let newIndex =/\d+/g.test(jump)?jump: (this.state.activeIndex + direction)
     this.setState({
@@ -183,13 +189,8 @@ class Guide extends Component {
     }
   }
   handleSkip(event) {
-    this.setState({
-      activeIndex: 0
-    })
-    this.refs.audio.pause()
-    this._setDot(this.state.dots[0])
     this._removeZindex()
-    this.props.onCancel(event)
+    this._closeGuide(event)
   }
   render () {
       var nextDisabled = this.state.activeIndex === this.state.dots.length - 1

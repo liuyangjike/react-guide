@@ -32,8 +32,8 @@ class App extends Component {
             <div className="example-left" data-step="2" data-tip='This is the basic usage of guide'>
               <h3>Basic use</h3>
               <ul >
-                <li >1.Use tag <code>&#60;Guide&#62;...&#60;/Guide&#62;</code> wrap you want to guide something.</li>
-                <li >2.Use <code>data-step</code> and <code>date-tip</code> attributes in dom.</li>                
+                <li >1. Use tag <code>&#60;Guide&#62;...&#60;/Guide&#62;</code> wrap you want to guide something.</li>
+                <li >2. Use <code>data-step</code> and <code>date-tip</code> attributes in dom.</li>                
               </ul>
             </div>
             <div className="example-right" data-step='3' data-tip='This is API document'>

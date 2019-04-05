@@ -134,19 +134,19 @@ class Guide extends Component {
     var gap = 12
     var arrowClass = ''
     var tipObj = {opacity: 1}
-    if (winH - dot.fBottom > 200) {
+    if (winH - dot.fBottom > 250 && winW - dot.left > 250) {
       arrowClass= 'top'
       tipObj = {top: dot.height + gap, left: 0}
-    } else if (winH - dot.top > 200) {
+    } else if (dot.top > 250  && winW - dot.left > 250) {
       arrowClass = 'bottom'
       tipObj = {bottom: dot.height + gap, left: 0}
-    } else if (dot.left > 200) {
+    } else if (dot.left > 250 && winH - dot.top > 250 || dot.left > winW) {
       arrowClass= 'right'
       tipObj =  {top: 0, right: dot.width + gap}
-    } else if (winW - dot.fRight > 200) {
+    } else if (winW - dot.fRight > 250  && winH - dot.top > 250) {
       arrowClass = 'left'
       tipObj = {top: 0, left: dot.width+ gap}
-    } else {
+    }  else {
       tipObj = {display: 'none'}
     }
     this.setState({
@@ -159,7 +159,7 @@ class Guide extends Component {
       node.style.setProperty('position', 'relative');
       node.style.setProperty('z-index', '999996', 'important');
       clearTimeout(timer)
-    }, 200)
+    }, 300)
     if (newIndex !== this.state.activeIndex) {
       this._removeActive()
     }
@@ -170,10 +170,11 @@ class Guide extends Component {
   _focusTarget(targetIndex) {
     var {top, bottom, left, right} = this.state.nodeList[targetIndex].getBoundingClientRect()
     let dTop = this.state.dots[targetIndex].top
-    if (top > window.innerHeight) {
-      window.scrollTo(0, top + window.scrollY - 20)
-    } else if (top < 0) {
-      window.scrollTo(0, dTop -20)
+    let dLeft = this.state.dots[targetIndex].left
+    let topBool = top > window.innerHeight || top < 0 || bottom > window.innerHeight
+    let leftBool = left >window.innerWidth || left < 0 || right > window.innerWidth
+    if (topBool || leftBool) {
+      window.scrollTo(dLeft - 100, dTop - 100)
     }
   }
   _removeActive() {

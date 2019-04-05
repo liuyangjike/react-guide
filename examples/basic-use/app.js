@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Guide from '../../src/index'
 import './app.css'
+import {data} from './data'
 class App extends Component {
   constructor () {
     super()
@@ -19,29 +20,50 @@ class App extends Component {
       start: false
     })
   }
-  handleOk (e) {
-    console.log(e.target.className)
-  }
   render() {
     return (
-      <div>
-      <Guide visible={this.state.start} onCancel={this.handleCancel.bind(this)} onOk={this.handleOk.bind(this)} >
-        <h1 className="example-header" >
-          <header data-step="1" data-tip='Welcome to use react-guide'>React Guide</header>
-        </h1>
-        <div className="example-main">
-          <div className="example-left">
-            <ul data-step="2" data-tip='I am jike'>
-              <li>1</li>
-              <li>2</li>
-            </ul>
+      <div className='example-container'>
+        <Guide visible={this.state.start} onCancel={this.handleCancel.bind(this)} >
+          <h1 className="example-header" >
+            <header data-step="1" data-tip='Welcome to use react-guide'>React Guide</header>
+          </h1>
+          <hr/>
+          <div className="example-main">
+            <div className="example-left" data-step="2" data-tip='This is the basic usage of guide'>
+              <h3>Basic use</h3>
+              <ul >
+                <li >1.Use tag <code>&#60;Guide&#62;...&#60;/Guide&#62;</code> wrap you want to guide something.</li>
+                <li >2.Use <code>data-step</code> and <code>date-tip</code> attributes in dom.</li>                
+              </ul>
+            </div>
+            <div className="example-right" data-step='3' data-tip='This is API document'>
+              <h3>API</h3>
+              <table className='example-api' >
+                <tbody>
+                {
+                  data.map((line, i) => {
+                    return (
+                      <tr key={`tr${i}`} className={`tr${i}`}>
+                        {
+                          line.map((cell, j) => {
+                            return (
+                              <td key={`th${j}`} className={`td${j}`}>
+                                {cell}
+                              </td>
+                            )
+                          })
+                        }
+                      </tr>
+                    )
+                  })
+                }
+                </tbody>
+
+              </table>
+            </div>
           </div>
-          <div>
-          <header data-step="3" data-tip='how are you'>you</header>
-          </div>
-        </div>
-    </Guide>
-    <button onClick={this.handleGiude.bind(this)}>start</button>
+        </Guide>
+        <button onClick={this.handleGiude.bind(this)}>start</button>
       </div>
     );
   }

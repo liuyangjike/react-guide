@@ -155,8 +155,11 @@ class Guide extends Component {
     return tipObj
   }
   _setTargetIndex (node, newIndex) {
-    node.style.setProperty('position', 'relative');
-    node.style.setProperty('z-index', '999996', 'important');
+    var timer = setTimeout(() => {
+      node.style.setProperty('position', 'relative');
+      node.style.setProperty('z-index', '999996', 'important');
+      clearTimeout(timer)
+    }, 200)
     if (newIndex !== this.state.activeIndex) {
       this._removeActive()
     }
@@ -179,6 +182,7 @@ class Guide extends Component {
     lastNode.style.setProperty('z-index', 'auto');
   }
   _closeGuide (event) {
+    this._removeActive()
     this.setState({
       activeIndex: 0
     })
@@ -203,7 +207,6 @@ class Guide extends Component {
   }
   handleSkip(event) {
     event = event || window.event;
-    this._removeActive()
     if (this.state.activeIndex === this.state.dots.length - 1) {
       this.props.onOk(event)
     }

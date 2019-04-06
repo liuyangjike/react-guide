@@ -10,7 +10,7 @@
     "build": "webpack --env.NODE_ENV=production",
     "pack": "webpack --env.NODE_ENV=package",
     "start": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest --color --coverage"
   },
   "keywords": [],
   "author": "",

@@ -41,24 +41,24 @@ class App extends Component {
   constructor () {
     super()
     this.state ={
-      start: false
+      visible: false
     }
   }
   handleStart(){
     this.setState({
-      start: true
+      visible: true
     })
   }
   handleCancel() {
     this.setState({
-      start: false
+      visible: false
     })
   }
   render() {
     return (
       <div>
         <Guide 
-          visible={this.state.start} 
+          visible={this.state.visible} 
           onCancel={this.handleCancel.bind(this)} >
             <h1 data-step="1" data-tip='Hello World'>Step1</h1>
             <div data-step="3" data-tip='Welcome to use react-guide'>Step3</div>

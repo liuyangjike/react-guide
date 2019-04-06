@@ -64,8 +64,9 @@ class Guide extends Component {
     let dot = dots[this.state.activeIndex]
     this.setState({
       tipStyle: this._getTipStyle(dot),
+      iconStyle: this._getIconStyle(dot),
+      contentStyle: dot,
       dots,
-      contentStyle: dot
     })
   }
   // click shadow

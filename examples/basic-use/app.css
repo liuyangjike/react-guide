@@ -15,6 +15,9 @@
   display: flex;
   justify-content: center;
 }
+.example-button a{
+  margin: 15px 0 0 15px;
+}
 
 .example-button button{
   background-color: #567;

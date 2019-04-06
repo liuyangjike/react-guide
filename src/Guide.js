@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
-import {getListFromLike, text2Voice} from './utils'
-import './guide.css'
+import PropTypes from 'prop-types';
+import {getListFromLike, text2Voice} from './utils';
+import './guide.css';
 
 class Guide extends Component {
   static defaultProps = {
@@ -197,8 +197,10 @@ class Guide extends Component {
   // reomve active style
   _removeActive() {
     let lastNode = this.state.nodeList[this.state.activeIndex]
-    lastNode.style.setProperty('position', '');
-    lastNode.style.setProperty('z-index', 'auto');
+    if (lastNode) {
+      lastNode.style.setProperty('position', '');
+      lastNode.style.setProperty('z-index', 'auto');
+    }
   }
   // close guide
   _closeGuide (event) {
@@ -230,9 +232,12 @@ class Guide extends Component {
   handleSkip(event) {
     event = event || window.event;
     if (this.state.activeIndex === this.state.dots.length - 1) {
-      this.props.onOk(event)
+      this.handleOk(event)
     }
     this._closeGuide(event)
+  }
+  handleOk(event) {
+    this.props.onOk(event)
   }
   render () {
       var nextDisabled = this.state.activeIndex === this.state.dots.length - 1

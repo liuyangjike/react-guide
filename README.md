@@ -6,6 +6,7 @@ A reactjs component is used for web page guidance
 * [Installation](#installation)
 * [API documentation](#api-documentation)
 * [Examples](#examples)
+* [demo](#demo)
 
 ## Installation
 
@@ -59,10 +60,10 @@ class App extends Component {
         <Guide 
           visible={this.state.start} 
           onCancel={this.handleCancel.bind(this)} >
-            <h1 data-step="1" data-tip='Hello World,I am Jike'>11</h1>
-            <div data-step="3" data-tip='nice to meet you'>22</div>
-            <h4 data-step="2" data-tip='glad to use react guide' >不不不</h4>
-            <div><span data-step="4" data-tip='let me start'>4444</span></div>
+            <h1 data-step="1" data-tip='Hello World'>Step1</h1>
+            <div data-step="3" data-tip='Welcome to use react-guide'>Step3</div>
+            <h4 data-step="2" data-tip='react-guide is very easy' >Step2</h4>
+            <div><span data-step="4" data-tip='Let start'>Step5</span></div>
       </Guide>
       <button onClick={this.handleStart.bind(this)}>start</button>
     </div>
@@ -73,3 +74,31 @@ ReactDOM.render(<App />, document.getElementById('root'));
 ```
 You can find more examples in the `examples` directory, which you can run in a
 local development server using `npm start`.
+
+## demo
+
+This is a demo show guide [demo](http://www.goingtrace.com/) 
+
+
+  "setupFiles": [
+    "./test/setup.js"
+  ],
+  "moduleFileExtensions": [
+    "js",
+    "jsx"
+  ],
+  "testPathIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "testRegex": ".*\\.test\\.js$",
+  "collectCoverage": false,
+  "collectCoverageFrom": [
+    "src/**/*.{js}"
+  ],
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+    "\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js"
+  },
+  "transform": {
+    "^.+\\.js$": "babel-jest"
+  }

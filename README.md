@@ -40,11 +40,11 @@ import Guide from 'react-guide'
 class App extends Component {
   constructor () {
     super()
-    this.state ={
+    this.state = {
       visible: false
     }
   }
-  handleStart(){
+  handleStart() {
     this.setState({
       visible: true
     })

@@ -28,7 +28,7 @@ class Guide extends Component {
     this.state = {
       activeIndex: 0,
       dots: [],
-      nodeList: [],
+      nodeList: [],  // nodeList for steped node
       contentStyle: {},
       iconStyle: {},
       tipStyle: {},
@@ -39,24 +39,7 @@ class Guide extends Component {
     }
   }
   componentDidMount () {
-    const nodeList = getListFromLike(this.refs.guide.querySelectorAll('[data-step]'))
-    nodeList.sort((a, b) => {
-      return Number(a.getAttribute('data-step'))- Number(b.getAttribute('data-step'))
-    })
-    let dots = nodeList.map(node => {
-      let height = node.clientHeight || node.offsetHeight
-      let width = node.clientWidth || node.offsetWidth
-      return {
-        left: node.offsetLeft,
-        top: node.offsetTop,
-        height,
-        width,
-        tip: node.getAttribute('data-tip'),
-        step: node.getAttribute('data-step'),
-        fRight: node.offsetLeft + width,
-        fBottom: node.offsetTop + height
-      }
-    })
+    const {dots, nodeList} = this._getMarkDomInfo()
     this.setState({
       dots,
       nodeList,
@@ -75,18 +58,24 @@ class Guide extends Component {
   componentWillUnmount () {
     window.removeEventListener('resize', this.onRezieWindow.bind(this), false)
   }
+  // when resize window, change tooltip position
   onRezieWindow () {
-    let dot = this.state.dots[this.state.activeIndex]
+    const {dots} = this._getMarkDomInfo()
+    let dot = dots[this.state.activeIndex]
     this.setState({
       tipStyle: this._getTipStyle(dot),
+      dots,
+      contentStyle: dot
     })
   }
+  // click shadow
   onClickShadow (event) {
     if (event.target.className ==='guide-shadow') {
       this.refs.shadow.removeEventListener('click',this.onClickShadow.bind(this), false)
       this._closeGuide(event)
     }
   }
+  // when audio fulfill, to change icon state 
   onAudioFulfill () {
     this.refs.audio.addEventListener('timeupdate', () => {
       let duration = this.refs.audio.duration
@@ -99,6 +88,7 @@ class Guide extends Component {
       }
     }, false)
   }
+  // to set some params according to dot
   _setDot (dot, newIndex, action) {
     let delay = action === 'start'?100:350
     this.setState({
@@ -120,6 +110,28 @@ class Guide extends Component {
     }, delay)
     this._playAudio()
   }
+  _getMarkDomInfo() {
+    const nodeList = getListFromLike(this.refs.guide.querySelectorAll('[data-step]'))
+    nodeList.sort((a, b) => {
+      return Number(a.getAttribute('data-step'))- Number(b.getAttribute('data-step'))
+    })
+    let dots = nodeList.map(node => {
+      let height = node.clientHeight || node.offsetHeight
+      let width = node.clientWidth || node.offsetWidth
+      return {
+        left: node.offsetLeft,
+        top: node.offsetTop,
+        height,
+        width,
+        tip: node.getAttribute('data-tip'),
+        step: node.getAttribute('data-step'),
+        fRight: node.offsetLeft + width,
+        fBottom: node.offsetTop + height
+      }
+    })
+    return {dots, nodeList}
+  }
+  // num icon style
   _getIconStyle (dot) {
     return {
       top: dot.top - 17,
@@ -128,6 +140,7 @@ class Guide extends Component {
       height: '20px',
     }
   }
+  // tooltip style
   _getTipStyle (dot) {
     var winH = window.innerHeight
     var winW = window.innerWidth
@@ -154,6 +167,7 @@ class Guide extends Component {
     })
     return tipObj
   }
+  // active target content style
   _setTargetIndex (node, newIndex) {
     var timer = setTimeout(() => {
       node.style.setProperty('position', 'relative');
@@ -164,9 +178,11 @@ class Guide extends Component {
       this._removeActive()
     }
   }
+  // play audio
   _playAudio () {
     this.refs.audio.autoplay = true
   }
+  // to change scroll to focus target
   _focusTarget(targetIndex) {
     var {top, bottom, left, right} = this.state.nodeList[targetIndex].getBoundingClientRect()
     let dTop = this.state.dots[targetIndex].top
@@ -177,11 +193,13 @@ class Guide extends Component {
       window.scrollTo(dLeft - 100, dTop - 100)
     }
   }
+  // reomve active style
   _removeActive() {
     let lastNode = this.state.nodeList[this.state.activeIndex]
     lastNode.style.setProperty('position', '');
     lastNode.style.setProperty('z-index', 'auto');
   }
+  // close guide
   _closeGuide (event) {
     this._removeActive()
     this.setState({
@@ -190,6 +208,7 @@ class Guide extends Component {
     this.refs.audio.pause()
     this.props.onCancel(event)
   }
+  // change step
   handleChangeStep (direction, jump) {
     let newIndex =/\d+/g.test(jump)?jump: (this.state.activeIndex + direction)
     this.setState({
@@ -198,6 +217,7 @@ class Guide extends Component {
     this._setDot(this.state.dots[newIndex], newIndex)
     this._setTargetIndex(this.state.nodeList[newIndex], newIndex)
   }
+  // jump step
   handleJumpStep (event) {
     event = event || window.event;
     let reg = /^dot\d/g

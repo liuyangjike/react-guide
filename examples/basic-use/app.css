@@ -11,13 +11,42 @@
   padding: 0 20px;
 }
 
+.example-button{
+  display: flex;
+  justify-content: center;
+}
+
+.example-button button{
+  background-color: #567;
+  border-color: #567;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #fff;
+  opacity: 1;
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  margin: 0;
+  padding: 16px 45px;
+  font-family: Heebo,Helvetica Neue,Source Sans Pro,Helvetica,Arial,sans-serif;
+  display: inline-block;
+  user-select: none;
+  border-radius: 5px;
+  transition: all .25s ease-in-out;
+}
+
+.example-button button:hover{
+  opacity: 0.7;
+}
+
 .example-main{
   display: flex;
 }
 
 .example-left{
   width: 40%;
-  height: 200px;
+  height: 100%;
   margin-left: 50px;
   padding: 10px;
 }

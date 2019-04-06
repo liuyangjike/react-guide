@@ -28,6 +28,9 @@ class App extends Component {
             <header data-step="1" data-tip='Welcome to use react-guide'>React Guide</header>
           </h1>
           <hr/>
+          <div className='example-button'> 
+            <button onClick={this.handleGiude.bind(this)}>start</button>              
+          </div>
           <div className="example-main">
             <div className="example-left" data-step="2" data-tip='This is the basic usage of guide'>
               <h3>Basic use</h3>
@@ -63,7 +66,6 @@ class App extends Component {
             </div>
           </div>
         </Guide>
-        <button onClick={this.handleGiude.bind(this)}>start</button>
       </div>
     );
   }

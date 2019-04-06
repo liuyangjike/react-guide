@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "webpack --env.NODE_ENV=production",
+    "pack": "webpack --env.NODE_ENV=package",
     "start": "webpack-dev-server"
   },
   "keywords": [],

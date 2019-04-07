@@ -51,7 +51,7 @@ class Guide extends Component {
     if (nextProps.visible && nextProps.visible !== this.props.visible) {
       this._setTargetIndex(this.state.nodeList[0], 0)
       this._setDot(this.state.dots[0], 0,'start')
-      this.refs.audio.load()
+      this.refs.audio && this.refs.audio.load()
     }
     return true
   }
@@ -78,7 +78,7 @@ class Guide extends Component {
   }
   // when audio fulfill, to change icon state 
   onAudioFulfill () {
-    this.refs.audio.addEventListener('timeupdate', () => {
+    this.refs.audio && this.refs.audio.addEventListener('timeupdate', () => {
       let duration = this.refs.audio.duration
       let current = this.refs.audio.currentTime
       let playClass = duration === current? 'audio-noplay' :'audio-play'
@@ -180,7 +180,9 @@ class Guide extends Component {
   }
   // play audio
   _playAudio () {
-    this.refs.audio.autoplay = true
+    if (this.refs.audio) {
+      this.refs.audio.autoplay = true
+    }
   }
   // to change scroll to focus target
   _focusTarget(targetIndex) {
@@ -208,7 +210,7 @@ class Guide extends Component {
     this.setState({
       activeIndex: 0
     })
-    this.refs.audio.pause()
+    this.refs.audio && this.refs.audio.pause()
     this.props.onCancel(event)
   }
   // change step
@@ -279,7 +281,7 @@ class Guide extends Component {
               </div>
             </div>
             <div className={`guide-arrow ${this.state.arrowClass}`}></div>
-            <div className={this.state.playClass}></div>
+            {this.props.audio && <div className={this.state.playClass}></div>}
           </div>
         </div>,
         this.props.num&&<div className="guide-icon-no" key='guide-icon-no' style={this.state.iconStyle} >{this.state.activeIndex + 1}</div>,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {getListFromLike, text2Voice} from './utils';
+import {getListFromLike, text2Voice, getWindowInfo} from './utils';
 import './guide.css';
 
 class Guide extends Component {
@@ -143,8 +143,7 @@ class Guide extends Component {
   }
   // tooltip style
   _getTipStyle (dot) {
-    var winH = window.innerHeight
-    var winW = window.innerWidth
+    var {winH, winW} = getWindowInfo()
     var gap = 12
     var arrowClass = ''
     var tipObj = {opacity: 1}
@@ -185,11 +184,12 @@ class Guide extends Component {
   }
   // to change scroll to focus target
   _focusTarget(targetIndex) {
+    var {winW, winH} = getWindowInfo()
     var {top, bottom, left, right} = this.state.nodeList[targetIndex].getBoundingClientRect()
     let dTop = this.state.dots[targetIndex].top
     let dLeft = this.state.dots[targetIndex].left
-    let topBool = top > window.innerHeight || top < 0 || bottom > window.innerHeight
-    let leftBool = left >window.innerWidth || left < 0 || right > window.innerWidth
+    let topBool = top > winH || top < 0 || bottom > winH
+    let leftBool = left > winW || left < 0 || right > winW
     if (topBool || leftBool) {
       window.scrollTo(dLeft - 100, dTop - 100)
     }

@@ -22,7 +22,7 @@ export function text2Voice(tip, lan){
 }
 
 
-// 解析
+// 
 function axiosObj (paramObj) {
   var url = ''
   for (var key in paramObj) {
@@ -35,7 +35,14 @@ function axiosObj (paramObj) {
   return url
 }
 
-// 驼峰命名转换成下划线命名
+// 
 function camelCase2underScore (str) {
   return str.replace(/([A-Z])/g, '_$1').toLowerCase()
+}
+
+export function getWindowInfo() {
+  return {
+    winW: window.innerWidth,
+    winH: window.innerHeight
+  }
 }

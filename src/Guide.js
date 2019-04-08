@@ -9,7 +9,7 @@ class Guide extends Component {
     num: true,
     visible: false,
     lan: 'en',
-    audio: true,
+    audio: true, 
     onCancel: function () {},
     onOk: function () {}
   }
@@ -56,7 +56,7 @@ class Guide extends Component {
   componentWillUnmount () {
     window.removeEventListener('resize', this.onRezieWindow.bind(this), false)
   }
-  // when resize window, change tooltip position
+  // when resize window, change tooltip  position
   onRezieWindow () {
     const {dots} = this._getMarkDomInfo()
     let dot = dots[this.state.activeIndex]

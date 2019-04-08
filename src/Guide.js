@@ -25,33 +25,31 @@ class Guide extends Component {
   }
   constructor (props) {
     super(props)
+    this.nodeList = []
+    this.dots = []
     this.state = {
       activeIndex: 0,
-      dots: [],
-      nodeList: [],  // nodeList for steped node
       contentStyle: {},
       iconStyle: {},
       tipStyle: {},
       tip: '',
       arrowClass: 'top',
       audioUrl: '',
-      playClass: 'audio-play'
+      playClass: 'audio-play',
     }
   }
   componentDidMount () {
     const {dots, nodeList} = this._getMarkDomInfo()
-    this.setState({
-      dots,
-      nodeList,
-    })
+    this.nodeList = nodeList
+    this.dots = dots
     window.addEventListener('resize', this.onRezieWindow.bind(this), false)
     this.onAudioFulfill()
   }
   shouldComponentUpdate (nextProps) {
     if (nextProps.visible && nextProps.visible !== this.props.visible) {
-      this._setTargetIndex(this.state.nodeList[0], 0)
-      this._setDot(this.state.dots[0], 0,'start')
-      this.refs.audio && this.refs.audio.load()
+      this._setTargetIndex(this.nodeList[0], 0)
+      this._setDot(this.dots[0], 0,'start')
+      this.audio && this.audio.load()
     }
     return true
   }
@@ -72,15 +70,15 @@ class Guide extends Component {
   // click shadow
   onClickShadow (event) {
     if (event.target.className ==='guide-shadow') {
-      this.refs.shadow.removeEventListener('click',this.onClickShadow.bind(this), false)
+      this.shadow.removeEventListener('click',this.onClickShadow.bind(this), false)
       this._closeGuide(event)
     }
   }
   // when audio fulfill, to change icon state 
   onAudioFulfill () {
-    this.refs.audio && this.refs.audio.addEventListener('timeupdate', () => {
-      let duration = this.refs.audio.duration
-      let current = this.refs.audio.currentTime
+    this.audio && this.audio.addEventListener('timeupdate', () => {
+      let duration = this.audio.duration
+      let current = this.audio.currentTime
       let playClass = duration === current? 'audio-noplay' :'audio-play'
       if (playClass !== this.state.playClass){
         this.setState({
@@ -112,7 +110,7 @@ class Guide extends Component {
     this._playAudio()
   }
   _getMarkDomInfo() {
-    const nodeList = getListFromLike(this.refs.guide.querySelectorAll('[data-step]'))
+    const nodeList = getListFromLike(this.guide.querySelectorAll('[data-step]'))
     nodeList.sort((a, b) => {
       return Number(a.getAttribute('data-step'))- Number(b.getAttribute('data-step'))
     })
@@ -180,16 +178,16 @@ class Guide extends Component {
   }
   // play audio
   _playAudio () {
-    if (this.refs.audio) {
-      this.refs.audio.autoplay = true
+    if (this.audio) {
+      this.audio.autoplay = true
     }
   }
   // to change scroll to focus target
   _focusTarget(targetIndex) {
     var {winW, winH} = getWindowInfo()
-    var {top, bottom, left, right} = this.state.nodeList[targetIndex].getBoundingClientRect()
-    let dTop = this.state.dots[targetIndex].top
-    let dLeft = this.state.dots[targetIndex].left
+    var {top, bottom, left, right} = this.nodeList[targetIndex].getBoundingClientRect()
+    let dTop = this.dots[targetIndex].top
+    let dLeft = this.dots[targetIndex].left
     let topBool = top > winH || top < 0 || bottom > winH
     let leftBool = left > winW || left < 0 || right > winW
     if (topBool || leftBool) {
@@ -198,7 +196,7 @@ class Guide extends Component {
   }
   // reomve active style
   _removeActive() {
-    let lastNode = this.state.nodeList[this.state.activeIndex]
+    let lastNode = this.nodeList[this.state.activeIndex]
     if (lastNode) {
       lastNode.style.setProperty('position', '');
       lastNode.style.setProperty('z-index', 'auto');
@@ -210,7 +208,7 @@ class Guide extends Component {
     this.setState({
       activeIndex: 0
     })
-    this.refs.audio && this.refs.audio.pause()
+    this.audio && this.audio.pause()
     this.props.onCancel(event)
   }
   // change step
@@ -219,8 +217,8 @@ class Guide extends Component {
     this.setState({
       activeIndex: newIndex
     })
-    this._setDot(this.state.dots[newIndex], newIndex)
-    this._setTargetIndex(this.state.nodeList[newIndex], newIndex)
+    this._setDot(this.dots[newIndex], newIndex)
+    this._setTargetIndex(this.nodeList[newIndex], newIndex)
   }
   // jump step
   handleJumpStep (event) {
@@ -233,7 +231,7 @@ class Guide extends Component {
   }
   handleSkip(event) {
     event = event || window.event;
-    if (this.state.activeIndex === this.state.dots.length - 1) {
+    if (this.state.activeIndex === this.dots.length - 1) {
       this.handleOk(event)
     }
     this._closeGuide(event)
@@ -242,17 +240,17 @@ class Guide extends Component {
     this.props.onOk(event)
   }
   render () {
-      var nextDisabled = this.state.activeIndex === this.state.dots.length - 1
+      var nextDisabled = this.state.activeIndex === this.dots.length - 1
       var backDisabled = !this.state.activeIndex
       var guideNodes = [
-        <div className="guide-shadow" ref='shadow' onClick={this.onClickShadow.bind(this)} key='guide-shadow'></div>,
+        <div className="guide-shadow" ref={(e) =>  this.shadow = e} onClick={this.onClickShadow.bind(this)} key='guide-shadow'></div>,
         <div className="guide-content" key='guide-content' style={this.state.contentStyle} >
           <div className="guide-tooltip" style={this.state.tipStyle} >
             <div>{this.state.tip}</div>
             {this.props.bullet&&<div className='guide-bullets'>
               <ul onClick={this.handleJumpStep.bind(this)}>
                 {
-                  this.state.dots.map((dot, index) => {
+                  this.dots.map((dot, index) => {
                     return (
                       <li key={`dot${index}`}>
                         <div id={`dot${index}`} 
@@ -287,10 +285,10 @@ class Guide extends Component {
         this.props.num&&<div className="guide-icon-no" key='guide-icon-no' style={this.state.iconStyle} >{this.state.activeIndex + 1}</div>,
       ]
       return (
-        <div className="guide-container" ref='guide'>
+        <div className="guide-container" ref={(e) => this.guide = e}>
           {this.props.children}
           {this.props.visible&&guideNodes}
-          {this.props.audio&&<audio ref='audio' src={this.state.audioUrl} type="audio/mpeg"></audio>}
+          {this.props.audio&&<audio ref={(e) =>  this.audio = e} src={this.state.audioUrl} type="audio/mpeg"></audio>}
         </div>
       )
   }

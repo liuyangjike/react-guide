@@ -23,7 +23,7 @@ class App extends Component {
   render() {
     return (
       <div className='example-container'>
-        <Guide visible={this.state.start} audio={false} onCancel={this.handleCancel.bind(this)} >
+        <Guide visible={this.state.start} audio={true} onCancel={this.handleCancel.bind(this)} >
           <h1 className="example-header" >
             <header data-step="1" data-tip='Welcome to use react-guide'>React Guide</header>
           </h1>
